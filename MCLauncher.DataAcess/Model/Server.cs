@@ -17,6 +17,8 @@ public partial class Server
 
     public bool? IsStarting { get; set; }
 
+    public bool? IsStopping { get; set; }
+
     public bool? IsClosed { get; set; }
 
     public bool? IsForgeServer { get; set; }
@@ -28,6 +30,8 @@ public partial class Server
     public string JarfileName { get; set; } = null!;
 
     public bool? AutoAgreeEula { get; set; }
+
+    public byte[]? ServerImage { get; set; }
 
     public int RamMinMb { get; set; }
 

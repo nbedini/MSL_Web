@@ -87,6 +87,9 @@ public partial class MSLContext : DbContext
             entity.Property(e => e.IsStarting)
                 .IsRequired()
                 .HasDefaultValueSql("('False')");
+            entity.Property(e => e.IsStopping)
+                .IsRequired()
+                .HasDefaultValueSql("('False')");
             entity.Property(e => e.JarfileName)
                 .HasMaxLength(50)
                 .HasColumnName("JARFileName");
