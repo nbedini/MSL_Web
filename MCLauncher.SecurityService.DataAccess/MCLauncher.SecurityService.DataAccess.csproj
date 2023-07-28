@@ -23,4 +23,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MCLauncher.SecurityService.Entities\MCLauncher.SecurityService.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

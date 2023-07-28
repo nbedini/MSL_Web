@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using MCLauncher.SecurityService.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace MCLauncher.SecurityService.DataAccess.Model;
 
 public partial class SecurityDbContext : DbContext
 {
     public SecurityDbContext()
-    {
-    }
-
-    public SecurityDbContext(DbContextOptions<SecurityDbContext> options)
-        : base(options)
     {
     }
 
@@ -26,7 +23,9 @@ public partial class SecurityDbContext : DbContext
     public virtual DbSet<User> Users { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Database=MCLauncherDB;Trusted_Connection=True;");
+    {
+        optionsBuilder.UseSqlServer(Statics_SecurityService.Configuration.GetConnectionString("Security_DB"));
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

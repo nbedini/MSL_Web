@@ -16,3 +16,28 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.LoginDiv {
+    width: 100%;
+    padding-left: 40%;
+}
+
+.Separator {
+    height: 40px;
+}
+
+.Separator2 {
+    height: 30px;
+}
+
+.SeparatorButton {
+    height: 35px;
+}
+
+.LoginButtonWidth {
+    width: 40%;
+}
+
+.Translator {
+    margin-top: 10%;
+}

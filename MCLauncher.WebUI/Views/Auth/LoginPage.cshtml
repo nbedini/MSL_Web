@@ -1,0 +1,42 @@
+﻿@model MCLauncher.WebUI.Models.LoginViewModel
+
+@{
+    ViewData["Title"] = "Login Page";
+}
+
+<div class="text-light Translator">
+    <center>
+        <h1>MC Launcher Login</h1>
+    </center>
+</div>
+
+<div class="Separator"></div>
+
+<div class="LoginDiv">
+    <div class="col-md-4 align-content-center">
+        <form asp-action="DoLogin">
+            <center>
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Username" class="control-label text-light"></label>
+                    <input asp-for="Username" class="text-center form-control" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                </div>
+                <div class="Separator2"></div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label text-light"></label>
+                    <input asp-for="Password" type="password" class="text-center form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="SeparatorButton"></div>
+                <div class="form-group">
+                    <input type="submit" value="Login" class="LoginButtonWidth btn btn-secondary" />
+                </div>
+            </center>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

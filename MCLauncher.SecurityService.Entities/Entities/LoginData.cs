@@ -9,10 +9,7 @@ namespace MCLauncher.SecurityService.Entities
 {
     public class LoginData : ILoginData
     {
-        private string _username;
-        private string _password;
-
-        public string Username { get => _username; set => _username = value; }
-        public string Password { get => _password; set => _password = value; }
+        public string Username { get; set; }
+        public string Password { get; set; }
     }
 }

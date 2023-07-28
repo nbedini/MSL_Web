@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Protocols;
 
 namespace MCLauncher.DataAcess.Model;
 
@@ -20,9 +22,6 @@ public partial class MSLContext : DbContext
     public virtual DbSet<MinecraftVersion> MinecraftVersions { get; set; }
 
     public virtual DbSet<Server> Servers { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer("Server=(localdb)\\MSSQLLocalDB; Database=MCLauncherDB; Trusted_Connection=True;MultipleActiveResultSets=true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

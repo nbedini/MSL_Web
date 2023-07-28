@@ -14,4 +14,10 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MCLauncher.Core.Entities\MCLauncher.Core.Entities.csproj" />
+    <ProjectReference Include="..\MCLauncher.DataAcess\MCLauncher.DataAcess.csproj" />
+    <ProjectReference Include="..\MCLauncher.SecurityService.Entities\MCLauncher.SecurityService.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
