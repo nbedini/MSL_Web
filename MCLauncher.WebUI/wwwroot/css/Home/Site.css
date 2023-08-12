@@ -1,0 +1,50 @@
+﻿html {
+    font-size: 14px;
+}
+
+@media (min-width: 100vw) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.Main {
+    height: 80vh;
+}
+
+.Prova {
+    width: 75%;
+    padding-left: 20%;
+}
+
+.UserOptions {
+    float: right;
+    display: inline;
+    height: 100%;
+}
+
+.UserOptionsMenu {
+    right: 0%;
+    left: auto;
+}
+
+.ServerSelector {
+    margin-top: 5%;
+}
+
+.ManageButton {
+    font-size: 15px;
+    outline-color: transparent;
+    background-color: transparent;
+    border: none;
+    padding-left: 0px;
+}

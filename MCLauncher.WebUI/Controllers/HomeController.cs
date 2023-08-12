@@ -19,9 +19,9 @@ namespace MCLauncher.WebUI.Controllers
         }
 
         [Route("/Home")]
-        public IActionResult Home()
+        public async Task<IActionResult> Home()
         {
-            var HomeModel = new HomeLayoutViewModel();
+            var HomeModel = new HomeViewModel();
 
             if (!Statics_WebUI.IsUserLogged())
                 return RedirectToAction("Login", "Auth");

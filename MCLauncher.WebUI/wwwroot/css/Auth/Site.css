@@ -1,0 +1,47 @@
+﻿html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.LoginDiv {
+    width: 100%;
+    padding-left: 40%;
+}
+
+.Separator {
+    height: 30px;
+}
+
+.Separator2 {
+    height: 30px;
+}
+
+.SeparatorButton {
+    height: 35px;
+}
+
+.LoginButtonWidth {
+    width: 40%;
+}
+
+.Translator {
+    margin-top: 20%;
+}
+
+.ForceLoginText {
+    width: fit-content;
+}

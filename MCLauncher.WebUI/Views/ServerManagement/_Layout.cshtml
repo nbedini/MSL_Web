@@ -1,6 +1,4 @@
-﻿@using MCLauncher.WebUI.Entities;
-@model MCLauncher.WebUI.Models.HomeLayoutViewModel
-
+﻿
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - MC Launcher</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/ServerManagement/Site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/MCLauncher.WebUI.styles.css" asp-append-version="true" />
 </head>
 <body class="bg-dark">
@@ -21,20 +19,16 @@
                             aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
-                    @*<div class="dropdown">
-                        <button class="btn btn-secondary dropdown-toggle DropDownButton" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">@ViewData["ServerSelected"]</button>
-                        <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton1">
-                            @if (((List<Server>)ViewData["ServerList"]).Count > 0)
-                            {
-                                foreach (var server in ((List<Server>)ViewData["ServerList"]))
-                                {
-                                    <li>
-                                        <input class="btn dropdown-item text-light bg-dark" value="@server.ServerName" onclick="ServerOptions('@server.ServerName.ToString()')">
-                                    </li>
-                                }
-                            }                            
+                    <div class="btn-group UserOptions">
+                        <button type="button" class="btn btn-dark dropdown-toggle text-light" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                            @ViewData["UserLogged"]
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end bg-dark">
+                            <li>
+                                <button class="btn dropdown-item text-light bg-dark" type="button" onclick="Logout('@ViewData["UserLogged"].ToString()')">Logout</button>
+                            </li>
                         </ul>
-                    </div>*@
+                    </div>
                 </div>
             </div>
         </nav>

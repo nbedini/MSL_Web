@@ -1,4 +1,54 @@
-﻿@{
+﻿@using MCLauncher.WebUI.Entities;
+@{
     ViewData["Title"] = "Home";
     Layout = "~/Views/Home/_Layout.cshtml";
 }
+
+<Center>
+    <h2 class="text-light">
+        Select a minecraft server to manage
+    </h2>
+</Center>
+
+<table class="table ServerSelector">
+    <thead>
+        <tr class="text-light">
+            <th>Id</th>
+            <th>Server Name</th>
+            <th>Installation Directory</th>
+            <th>Status</th>
+            <th>Player Online</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var server in (List<Server>)ViewData["ServerList"])
+        {
+            <tr class="text-light">
+                <td>@server.Id</td>
+                <td>@server.ServerName</td>
+                <td>@server.InstallDirectory</td>
+                @if ((bool)server.IsStarting)
+                {
+                    <td>Starting</td>
+                }
+                else if ((bool)server.IsOpen)
+                {
+                    <td>Open</td>
+                }
+                else if ((bool)server.IsStopping)
+                {
+                    <td>Stopping</td>
+                }
+                else if ((bool)server.IsClosed)
+                {
+                    <td>Closed</td>
+                }
+                <td>@server.NumPlayerOnline</td>
+                <td>
+                    <button class="text-light ManageButton" type="button" onclick="ServerSettings('@server.ServerName.ToString()')">Manage</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

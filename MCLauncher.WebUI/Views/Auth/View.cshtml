@@ -1,0 +1,132 @@
+﻿@model IEnumerable<MCLauncher.DataAcess.Model.Server>
+
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/ServerManagement/_Layout.cshtml";
+}
+
+<h1>View</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.InsertDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServerName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsOpen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsStarting)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsStopping)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsClosed)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsForgeServer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InstallDirectory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JarfileName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AutoAgreeEula)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServerImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RamMinMb)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RamMaxMb)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastStartDateTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumPlayerOnline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdForgeVersionNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdMinecraftVersionNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.InsertDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsOpen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsStarting)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsStopping)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsClosed)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsForgeServer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InstallDirectory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JarfileName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutoAgreeEula)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServerImage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RamMinMb)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RamMaxMb)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastStartDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumPlayerOnline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdForgeVersionNavigation.ForgeVersion1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdMinecraftVersionNavigation.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

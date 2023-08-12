@@ -26,5 +26,23 @@ namespace MCLauncher.Core.API.Controllers
 
             await Response.Body.WriteAsync(Encoding.UTF8.GetBytes(ResponseString));
         }
+
+        [HttpPost("GetServer")]
+        public async void GetServer()
+        {
+            var ResponseString = string.Empty;
+            Server SelectedServer;
+            string SelectedServerName = JsonConvert.DeserializeObject<string>(await (new StreamReader(Request.Body)).ReadToEndAsync());
+
+            using (var db = new MSLContext())
+            {
+                SelectedServer = db.Servers.FirstOrDefault(f => f.ServerName == SelectedServerName);
+            }
+
+            ResponseString = JsonConvert.SerializeObject(SelectedServer, Formatting.Indented);
+            Response.ContentType = "application/json";
+
+            await Response.Body.WriteAsync(Encoding.UTF8.GetBytes(ResponseString));
+        }
     }
 }

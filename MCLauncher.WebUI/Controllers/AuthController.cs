@@ -69,7 +69,7 @@ namespace MCLauncher.WebUI.Controllers
                         Statics_WebUI.UsernameLogged = LoginData.Username;
                         Statics_WebUI.UserLogged = true;
 
-                        return Redirect($"https://{this.Request.Host.ToUriComponent()}/Home");
+                        return RedirectToAction("Home", "Home");
                     }
                     else if (loginResult.LoginStatus == LoginErrorStatus.UserAlreadyLogged)
                     {
