@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MCLauncher.DataAcess.Model;
+namespace MCLauncher.WebUI.Entities;
 
 public partial class Server
 {

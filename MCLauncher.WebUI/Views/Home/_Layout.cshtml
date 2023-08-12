@@ -1,0 +1,68 @@
+﻿@using MCLauncher.WebUI.Entities;
+@model MCLauncher.WebUI.Models.HomeLayoutViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MC Launcher</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/MCLauncher.WebUI.styles.css" asp-append-version="true" />
+</head>
+<body class="bg-dark" onbeforeunload="ForceLogout()">
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand text-light">MC Server Launcher</a>
+                <div class="Prova">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="dropdown SelectServer">
+                        <button class="btn btn-secondary dropdown-toggle DropDownButton" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">@ViewData["ServerSelected"]</button>
+                        <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenuButton1">
+                            @if (((List<Server>)ViewData["ServerList"]).Count > 0)
+                            {
+                                foreach (var server in ((List<Server>)ViewData["ServerList"]))
+                                {
+                                    <li>
+                                        <input class="btn dropdown-item text-light bg-dark" value="@server.ServerName" onclick="ServerSettings('@server.ServerName.ToString()')">
+                                    </li>
+                                }
+                            }                            
+                        </ul>
+                    </div>
+                    <div class="btn-group UserOptions">
+                        <button type="button" class="btn btn-dark dropdown-toggle text-light" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                            @ViewData["UserLogged"]
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end bg-dark">
+                            <li>
+                                <button class="btn dropdown-item text-light bg-dark" type="button" onclick="Logout('@ViewData["UserLogged"].ToString()')">Logout</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - MC Launcher
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/Home.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

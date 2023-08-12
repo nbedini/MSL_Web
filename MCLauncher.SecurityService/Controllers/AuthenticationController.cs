@@ -32,10 +32,20 @@ namespace MCLauncher.SecurityService.Controllers
                     result.LoginStatus = LoginErrorStatus.UserNotFound;
                     return result;
                 }
-                else if (Convert.ToBoolean(user.IsLogged))
+                else if (Convert.ToBoolean(user.IsLogged) && !loginData.ForceLoginRequired)
                 {
                     result.ErrorText = "User already logged, Impossible to complete operation.";
                     result.LoginStatus = LoginErrorStatus.UserAlreadyLogged;
+                    return result;
+                }
+                else if (loginData.ForceLoginRequired)
+                {
+                    var updateUser = user;
+                    updateUser.LastLoginDateTime = DateTime.Now;
+
+                    db.Users.Update(updateUser);
+                    db.SaveChanges();
+
                     return result;
                 }
                 else
@@ -53,10 +63,11 @@ namespace MCLauncher.SecurityService.Controllers
         }
 
         [HttpPost("Logout")]
-        public LogoutResult Logout([FromBody] LogoutData logoutData)
+        public async Task<LogoutResult> Logout()
         {
             User? user;
             LogoutResult result = new() { LogoutStatus = LogoutErrorStatus.Success, ErrorText = string.Empty };
+            var logoutData = JsonConvert.DeserializeObject<LogoutData>(await(new StreamReader(Request.Body)).ReadToEndAsync());
 
             using (var db = new SecurityDbContext())
             {

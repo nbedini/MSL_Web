@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using MCLauncher.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Protocols;
 
 namespace MCLauncher.DataAcess.Model;
 
@@ -23,10 +23,13 @@ public partial class MSLContext : DbContext
 
     public virtual DbSet<Server> Servers { get; set; }
 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer(Statics_Core.Configuration.GetConnectionString("MSL_DB"));
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.UseCollation("Latin1_General_CI_AS");
-
         modelBuilder.Entity<ForgeVersion>(entity =>
         {
             entity.ToTable("ForgeVersions", "MSL");
@@ -63,14 +66,16 @@ public partial class MSLContext : DbContext
 
         modelBuilder.Entity<Server>(entity =>
         {
+            entity.HasKey(e => new { e.Id, e.IdMinecraftVersion });
+
             entity.ToTable("Servers", "MSL");
 
+            entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            entity.Property(e => e.IdMinecraftVersion).HasColumnName("Id_MinecraftVersion");
             entity.Property(e => e.AutoAgreeEula)
-                .IsRequired()
                 .HasDefaultValueSql("('False')")
                 .HasColumnName("AutoAgreeEULA");
             entity.Property(e => e.IdForgeVersion).HasColumnName("Id_ForgeVersion");
-            entity.Property(e => e.IdMinecraftVersion).HasColumnName("Id_MinecraftVersion");
             entity.Property(e => e.InsertDateTime)
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime");
@@ -93,13 +98,17 @@ public partial class MSLContext : DbContext
                 .HasMaxLength(50)
                 .HasColumnName("JARFileName");
             entity.Property(e => e.LastStartDateTime).HasColumnType("datetime");
-            entity.Property(e => e.RamMaxMb).HasColumnName("RamMax(MB)");
-            entity.Property(e => e.RamMinMb).HasColumnName("RamMin(MB)");
+            entity.Property(e => e.NumPlayerOnline).HasDefaultValueSql("((0))");
+            entity.Property(e => e.RamMaxMb)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("RamMax(MB)");
+            entity.Property(e => e.RamMinMb)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("RamMin(MB)");
             entity.Property(e => e.ServerName).HasMaxLength(50);
 
             entity.HasOne(d => d.IdForgeVersionNavigation).WithMany(p => p.Servers)
                 .HasForeignKey(d => d.IdForgeVersion)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Servers_ForgeVersions");
 
             entity.HasOne(d => d.IdMinecraftVersionNavigation).WithMany(p => p.Servers)

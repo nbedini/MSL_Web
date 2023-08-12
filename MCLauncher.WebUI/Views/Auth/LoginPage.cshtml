@@ -2,31 +2,64 @@
 
 @{
     ViewData["Title"] = "Login Page";
+    Layout = "~/Views/Auth/_Layout.cshtml";
 }
 
 <div class="text-light Translator">
     <center>
-        <h1>MC Launcher Login</h1>
+        <h1>MC Server Launcher Login</h1>
     </center>
 </div>
 
 <div class="Separator"></div>
 
+
 <div class="LoginDiv">
     <div class="col-md-4 align-content-center">
-        <form asp-action="DoLogin">
+        <form asp-action="DoLogin" method="post" asp-controller="Auth">
+            @if (Model != null)
+            {
+                @if (Model.UserAlreadyLogged)
+                {
+                    <center>
+                        <div>
+                            <p class="text-danger">User already logged</p>
+                        </div>
+                        <div class="form-check text-center">
+                            <center>
+                                <p class="text-light ForceLoginText text-center"><input asp-for="ForceLoginRequired" type="checkbox" class="form-check-input" /> Force Login</p>
+                            </center>
+                        </div>
+                    </center>
+
+                    <div class="Separator"></div>
+                }
+            }
+
             <center>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <label asp-for="Username" class="control-label text-light"></label>
                     <input asp-for="Username" class="text-center form-control" />
-                    <span asp-validation-for="Username" class="text-danger"></span>
+                    @if (Model != null)
+                    {
+                        @if (!Model.UserAlreadyLogged)
+                        {
+                            <span asp-validation-for="Username" class="text-danger"></span>
+                        }
+                    }
                 </div>
                 <div class="Separator2"></div>
                 <div class="form-group">
                     <label asp-for="Password" class="control-label text-light"></label>
                     <input asp-for="Password" type="password" class="text-center form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
+                    @if(Model != null)
+                    {
+                        @if (!Model.UserAlreadyLogged)
+                        {
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        }
+                    }
                 </div>
                 <div class="SeparatorButton"></div>
                 <div class="form-group">
